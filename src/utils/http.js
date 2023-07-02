@@ -1,7 +1,7 @@
 // axios封装
 import axios from "axios";
 
-// 配置基地址
+// 配置基地址 create可以使用多次生成多个实例对象,实现不同的业务需求
 const httpInstance = axios.create({
     baseURL: 'http://pcapi-xiaotuxian-front-devtest.itheima.net',
     timeout: 5000,
