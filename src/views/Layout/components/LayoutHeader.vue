@@ -1,4 +1,20 @@
 <script setup>
+// 获取接口函数
+import { getCategoryApi } from '@/apis/layout'
+import { onMounted,ref } from 'vue'
+
+const categoryList = ref([])
+
+// 发起获取列表请求,并保存数据
+const getCategory = async () => {
+  const res = await getCategoryApi()
+  categoryList.value = res.result
+}
+
+// 页面加载完发起请求
+onMounted(() => {
+  getCategory()
+})
 
 </script>
 
@@ -9,12 +25,9 @@
         <RouterLink to="/">小兔鲜</RouterLink>
       </h1>
       <ul class="app-header-nav">
-        <li class="home">
-          <RouterLink to="/">首页</RouterLink>
+        <li class="home" v-for="item in categoryList" :key="item.id">
+          <RouterLink to="/">{{ item.name }}</RouterLink>
         </li>
-        <li> <RouterLink to="/">居家</RouterLink> </li>
-        <li> <RouterLink to="/">美食</RouterLink> </li>
-        <li> <RouterLink to="/">服饰</RouterLink> </li>
       </ul>
       <div class="search">
         <i class="iconfont icon-search"></i>
