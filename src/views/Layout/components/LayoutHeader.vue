@@ -1,20 +1,10 @@
 <script setup>
-// 获取接口函数
-import { getCategoryApi } from '@/apis/layout'
-import { onMounted,ref } from 'vue'
+// 使用pinia中的数据
+import { useCategoryStore } from '@/stores/category';
 
-const categoryList = ref([])
+const categoryStore = useCategoryStore()
+// 避免数据请求重复,导航请求在index中进行
 
-// 发起获取列表请求,并保存数据
-const getCategory = async () => {
-  const res = await getCategoryApi()
-  categoryList.value = res.result
-}
-
-// 页面加载完发起请求
-onMounted(() => {
-  getCategory()
-})
 
 </script>
 
@@ -25,7 +15,7 @@ onMounted(() => {
         <RouterLink to="/">小兔鲜</RouterLink>
       </h1>
       <ul class="app-header-nav">
-        <li class="home" v-for="item in categoryList" :key="item.id">
+        <li class="home" v-for="item in categoryStore.categoryList" :key="item.id">
           <RouterLink to="/">{{ item.name }}</RouterLink>
         </li>
       </ul>
