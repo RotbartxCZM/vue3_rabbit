@@ -6,8 +6,6 @@ import { useCategoryStore } from '@/stores/category';
 
 const { y } = useScroll(window)
 const categoryStore = useCategoryStore()
-
-
 </script>
 
 <template>

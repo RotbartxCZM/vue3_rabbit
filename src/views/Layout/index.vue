@@ -15,8 +15,6 @@ onMounted(() => {
 })
 
 </script>
-
-
 <template>
         <!-- 导航吸附 -->
         <LayoutFixed />
