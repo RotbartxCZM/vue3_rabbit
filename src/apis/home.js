@@ -1,9 +1,15 @@
 import httpInstance   from '@/utils/http'
 
 // 获取banner
-export function getBannerApi () {
+export function getBannerApi (params = {}) {
+    // 默认为1,商品为2,这是在对象解构中设置默认值, 
+//如果params中distributionSite为undefined,则使用默认值1,否则distributionSite使用params传递的值
+    const { distributionSite = '1' } = params
     return httpInstance({
-        url: '/home/banner'
+        url: '/home/banner',
+        params: {
+            distributionSite
+        }
     })
 }
 
