@@ -1,30 +1,10 @@
 <script setup>
-import { getCategoryAPI } from '@/apis/Category'
-import { getBannerApi } from '@/apis/home'
-import { onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router';
-const categoryData = ref({})
-const bannerList = ref([])
-// 获取路由实例对象
-const route = useRoute()
 
-const getCategoryList = async () => {
-  const res = await getCategoryAPI(route.params.id)
-  categoryData.value = res.result
-}
-
-// 获取banner 
-const getBanner = async () => {
-  const res = await getBannerApi({
-    distributionSite: '2'
-  })
-  bannerList.value = res.result
-}
-
-onMounted(() => {
-  getCategoryList()
-  getBanner()
-})
+import GoodsItem from '../Home/components/GoodsItem.vue'
+import { useBanner } from './composables/useBanner'
+import { useCategory } from './composables/useCategory.js'
+const { bannerList } = useBanner()
+const { categoryData } = useCategory()
 </script>
 
 <template>
@@ -45,6 +25,27 @@ onMounted(() => {
           </el-carousel-item>
         </el-carousel>
       </div>
+      <!-- 分类列表 -->
+      <div class="sub-list">
+        <h3>全部分类</h3>
+        <ul>
+          <li v-for="i in categoryData.children" :key="i.id">
+            <RouterLink :to="`/category/sub/${i.id}`">
+              <img :src="i.picture" />
+              <p>{{ i.name }}</p>
+            </RouterLink>
+          </li>
+        </ul>
+      </div>
+      <div class="ref-goods" v-for="item in categoryData.children" :key="item.id">
+        <div class="head">
+          <h3>- {{ item.name }}-</h3>
+        </div>
+        <div class="body">
+          <GoodsItem v-for="good in item.goods" :goods="good" :key="good.id" />
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
