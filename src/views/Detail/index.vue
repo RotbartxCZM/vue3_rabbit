@@ -9,6 +9,9 @@ const getGoods = async () => {
   const res = await getDetail(route.params.id)
   goods.value = res.result
 }
+const skuChange = (sku) => {
+  console.log(sku);
+}
 
 onMounted(() => {
   getGoods()
@@ -36,7 +39,7 @@ onMounted(() => {
           <div class="goods-info">
             <div class="media">
               <!-- 图片预览区 -->
-
+              <XtxImgView :imageList="goods.mainPictures"/>
               <!-- 统计数量 -->
               <ul class="goods-sales">
                 <li>
@@ -85,6 +88,7 @@ onMounted(() => {
                 </dl>
               </div>
               <!-- sku组件 -->
+              <XtxSku :goods="goods" @change="skuChange"/>
 
               <!-- 数据组件 -->
 
