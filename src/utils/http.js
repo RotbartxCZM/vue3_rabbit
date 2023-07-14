@@ -1,5 +1,11 @@
+// pinia获取token
+import { useUserStore } from "@/stores/user";
 // axios封装
 import axios from "axios";
+import router from "@/router";
+// 错误提示框
+import { ElMessage } from 'element-plus'
+import 'element-plus/theme-chalk/el-message.css'
 
 // 配置基地址 create可以使用多次生成多个实例对象,实现不同的业务需求
 const httpInstance = axios.create({
@@ -9,11 +15,25 @@ const httpInstance = axios.create({
 
 // axios请求拦截器
 httpInstance.interceptors.request.use(config => {
+    const userStore = useUserStore()
+    const token = userStore.userInfo.token
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`
+    }
     return config
   }, e => Promise.reject(e))
   
 // axios响应式拦截器
 httpInstance.interceptors.response.use(res => res.data, e => {
+    const userStore = useUserStore()
+    // 统一错误提示
+    ElMessage({ type: 'warning', message: e.response.data.message })
+    // 401 token失效错误拦截
+    if(e.response.status === 401) {
+        // 清除储存信息,跳转到登录页
+        userStore.clearUserInfo()
+        router.push('/login')
+    }
     return Promise.reject(e)
 })
   
