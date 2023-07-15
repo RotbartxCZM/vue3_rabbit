@@ -1,6 +1,6 @@
 <script setup>
 // 使用pinia中的数据
-import { useCategoryStore } from '@/stores/category';
+import { useCategoryStore } from '@/stores/categoryStore';
 
 const categoryStore = useCategoryStore()
 
@@ -154,4 +154,4 @@ const categoryStore = useCategoryStore()
     }
   }
 }
-</style>
+</style>@/stores/categoryStore@/stores/categoryStore

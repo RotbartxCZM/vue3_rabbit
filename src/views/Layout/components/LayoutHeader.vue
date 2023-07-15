@@ -1,7 +1,7 @@
 <script setup>
 // 使用pinia中的数据
-import { useCategoryStore } from '@/stores/category';
-
+import { useCategoryStore } from '@/stores/categoryStore';
+import HeaderCart from './HeaderCart.vue';
 const categoryStore = useCategoryStore()
 // 避免数据请求重复,导航请求在index中进行
 
@@ -24,7 +24,7 @@ const categoryStore = useCategoryStore()
         <input type="text" placeholder="搜一搜">
       </div>
       <!-- 头部购物车 -->
-      
+      <HeaderCart />
     </div>
   </header>
 </template>
@@ -131,4 +131,4 @@ const categoryStore = useCategoryStore()
     }
   }
 }
-</style>
+</style>@/stores/categoryStore@/stores/categoryStore

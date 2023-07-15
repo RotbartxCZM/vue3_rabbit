@@ -1,5 +1,5 @@
 // pinia获取token
-import { useUserStore } from "@/stores/user";
+import { useUserStore } from "@/stores/userStore";
 // axios封装
 import axios from "axios";
 import router from "@/router";

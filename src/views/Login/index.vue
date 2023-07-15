@@ -6,11 +6,12 @@ import 'element-plus/theme-chalk/el-message.css'
 
 import { useRouter } from 'vue-router';
 
-import { useUserStore } from '@/stores/user'
+import { useUserStore } from '@/stores/userStore'
 
+import { useCarteStore } from '@/stores/cartStore';
 // 获取实例对象
 const userStore = useUserStore()
-
+const carteStore = useCarteStore()
 // 表单对象
 const form = ref({
   account: 'xiaotuxian001',
@@ -343,4 +344,4 @@ const doLogin = () => {
   width: 100%;
   color: #fff;
 }
-</style>
+</style>@/stores/userStore@/stores/userStore
