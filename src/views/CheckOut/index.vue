@@ -11,7 +11,6 @@ const checkInfo = ref({})  // 订单对象
 const curAddress= ref({})
 const getCheckInfo = async () => {
   const res = await getCheckoutInfoAPI()
-  console.log(res)
   checkInfo.value =res.result
   curAddress.value = checkInfo.value.userAddresses.find((item) => item.isDefault === 0)
 }

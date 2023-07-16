@@ -27,7 +27,6 @@ export const useCarteStore = defineStore('carte', () => {
             await insertCartAPI({ skuId, count })
             // 获取最新的购物车列表(数据库)覆盖本地列表
             updateNewList()
-            console.log(cartList.value);
         } else {
             // 找是否存在这个商品
             const item = cartList.value.find((value) => goods.skuId === value.skuId)
@@ -47,7 +46,6 @@ export const useCarteStore = defineStore('carte', () => {
             await delCartAPI([skuId])
              // 获取最新的购物车列表(数据库)覆盖本地列表
              updateNewList()
-             console.log(cartList.value);
         } else {
             const index = cartList.value.findIndex((item) => skuId === item.skuId)
             cartList.value.splice(index,1)
